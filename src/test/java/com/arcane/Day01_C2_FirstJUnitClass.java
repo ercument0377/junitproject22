@@ -53,7 +53,7 @@ public class Day01_C2_FirstJUnitClass {
         Assert.assertEquals("java","java"); // test basarılı
         Assert.assertEquals("Java","javascript"); // test basarısız
 
-///////////////////geldi mi
+
     }
 
 }
