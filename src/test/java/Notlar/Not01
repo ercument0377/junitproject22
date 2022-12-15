@@ -17,5 +17,6 @@ junitproject22,  framework'tur (çerçevemizdir)
 
 *@Test, @Before, @BeforeClass, @After, @AfterClass, @Ignore
 
-
+seleniumda 8 locator var
+id
 
