@@ -60,11 +60,14 @@ public class Day03_C6_CheckBox {
 
 
         }
+        @After
+        public void tearDown(){
+        driver.close();
 
 
 
     }
 
-
+}
 
 

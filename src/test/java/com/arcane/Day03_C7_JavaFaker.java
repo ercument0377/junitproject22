@@ -49,7 +49,7 @@ public class Day03_C7_JavaFaker {
         // rastgele hayvan ismi versin
         System.out.println(faker.animal().name());
 
-        //rastgele bir resim (avatar) veriri
+        //rastgele bir resim (avatar) verir
         System.out.println(faker.avatar().image());
 
 
