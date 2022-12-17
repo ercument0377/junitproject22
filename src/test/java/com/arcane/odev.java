@@ -2,6 +2,7 @@ package com.arcane;
 
 import com.github.javafaker.Faker;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,11 +56,12 @@ import java.util.concurrent.TimeUnit;
             driver = new ChromeDriver();
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             driver.manage().window().maximize();
+
         }
 
-        // 2. Go to https://www.automationexercise.com/
         @Test
         public void radioButton() throws InterruptedException {
+            // 2. Go to https://www.automationexercise.com/
             driver.get("https://www.automationexercise.com/");
 
 // 3. Signup/Login link'ine click edin
@@ -74,16 +76,25 @@ import java.util.concurrent.TimeUnit;
 
 
 // 5. Text'i Verify et : ENTER ACCOUNT INFORMATION
-
+            Thread.sleep(1000);
+    Assert.assertTrue(driver.findElement(By.xpath("//*[text()='Enter Account Information']")).isDisplayed());
 
 // 6. Text'i Verify et : ADDRESS INFORMATION
+            Assert.assertTrue(driver.findElement(By.xpath("//*[text()='Address Information']")).isDisplayed());
+         //   System.out.println(driver.findElement(By.xpath("//*[text()='Address Information']")).getText());
 
 
 // 7. Text'i Verify et : Title
+            Assert.assertTrue(driver.findElement(By.xpath("//*[text()='Title']")).isDisplayed());
+
 
 
 // 8. title'i secin
-            driver.findElement(By.xpath("//div[@id='uniform-id_gender1']")).click();
+        WebElement male =    driver.findElement(By.xpath("//input[@id='id_gender1']"));
+            Thread.sleep(1000);
+        if(!male.isSelected()){
+            male.click();
+        }
 
 // 9. Name girin (var olani degistir)
             driver.findElement(By.xpath("//input[@name='name']")).sendKeys(faker.name().firstName());
@@ -93,62 +104,59 @@ import java.util.concurrent.TimeUnit;
 
 //11. Date of Birth (dogum tarihi) girin
             //gun
-            WebElement gun = driver.findElement(By.xpath("//select[@name='days']"));
+            WebElement gun = driver.findElement(By.xpath("//select[@id='days']"));
             Select gunDropDown = new Select(gun);
-            gunDropDown.selectByValue("11");
+            gunDropDown.selectByValue("5");
 
             //ay
             WebElement ay = driver.findElement(By.xpath("//select[@name='months']"));
             Select ayDropDown = new Select(ay);
-            ayDropDown.selectByValue("11");
+            ayDropDown.selectByVisibleText("October");
 
             //yıl
             WebElement yil = driver.findElement(By.xpath("//select[@name='years']"));
             Select yilDropDown = new Select(yil);
-            yilDropDown.selectByVisibleText("2011");
+            yilDropDown.selectByValue("1992");
 
 //12. Sign up for our newsletter! click edin
-       /    WebElement checkBox1 = driver.findElement(By.xpath("//div[@id='uniform-newsletter']"));
-            if (!checkBox1.isSelected()) {
-                checkBox1.click();
+           WebElement newsLater = driver.findElement(By.xpath("//*[@for='newsletter']"));
+            if (!newsLater.isSelected()) {
+                newsLater.click();
             }
 //13. Receive special offers from our partners! click edin
-                WebElement checkBox2 = driver.findElement(By.xpath("//div[@id='uniform-optin']"));
-                if (!checkBox2.isSelected()) {
-                    checkBox2.click();
-                }
+            WebElement offer = driver.findElement(By.xpath("//*[@for='optin']"));
+            if (!offer.isSelected()) {
+                offer.click();
+            }
 
 //14. first name girin
-                    driver.findElement(By.xpath("//input[@name='first_name']")).sendKeys(faker.name().firstName());
+                    driver.findElement(By.id("first_name")).sendKeys(faker.name().firstName());
 
 
 //15. last name girin
-                    driver.findElement(By.xpath("//input[@name='last_name']")).sendKeys(faker.name().lastName());
+                    driver.findElement(By.id("last_name")).sendKeys(faker.name().lastName());
 
 //16. company girin
-                    //   driver.findElement(By.xpath("//input[@name='company']")).sendKeys(faker.internet().????);
+            driver.findElement(By.id("company")).sendKeys(faker.company().name());
 
 
 //17. Address girin
-                    //    driver.findElement(By.xpath("//input[@name='address1']")).sendKeys(faker.internet().????);
+            driver.findElement(By.id("address1")).sendKeys(faker.address().fullAddress());
 
 //18. Country secin
-                    WebElement country = driver.findElement(By.xpath("//select[@id='country']"));
-                    Select countryDropDown = new Select(country);
-                    ayDropDown.selectByValue("3");
+            WebElement country = driver.findElement(By.xpath("//select[@name='country']"));
+            Select countryDropDown = new Select(country);
+            countryDropDown.selectByValue("Canada");
 
 //19. State girin
-                    //    driver.findElement(By.xpath("//input[@id='state']")).sendKeys(faker.internet().????);
-
+            driver.findElement(By.id("state")).sendKeys(faker.address().state());
 
 //20. City girin
-                    //    driver.findElement(By.xpath("//input[@id='city']")).sendKeys(faker.internet().????);
-
+            driver.findElement(By.id("city")).sendKeys(faker.address().city());
 //21. ZipCode girin
-                    //     driver.findElement(By.xpath("//input[@id='zipcode']")).sendKeys(faker.internet().????);
-
+            driver.findElement(By.id("zipcode")).sendKeys(faker.address().zipCode());
 //22. mobile phone girin
-                    //    driver.findElement(By.xpath("//input[@id='mobile_number']")).sendKeys(faker.internet().?????);
+            driver.findElement(By.id("mobile_number")).sendKeys(faker.phoneNumber().phoneNumber());
 
 //23. Create Account'u Click edin
                     driver.findElement(By.xpath("//button[@class='btn btn-default']")).click();
@@ -156,10 +164,13 @@ import java.util.concurrent.TimeUnit;
 
 //24. Ardindan MY ACCOUNT'un sayfada bulundugunuzu verifey edin
 
-                    //   WebElement myAccountElement = chrome.findElement(By.className("MY ACCOUNT"));
-                    //   Assert.assertTrue(myAccountElement.isDisplayed());
+                       Assert.assertTrue(driver.findElement(By.xpath("//h2[@data-qa='account-created']")).isDisplayed());
 
 
+                }
+                @After
+                 public  void tearDown(){
+                 driver.close();
                 }
 
             }
