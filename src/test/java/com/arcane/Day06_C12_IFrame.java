@@ -69,7 +69,7 @@ public class Day06_C12_IFrame {
         // parent frame geçiş yapmak lazım
         driver.switchTo().parentFrame();
 
-        WebElement elementalSelenium = driver.findElement(By.xpath("Elemental Selenium"));
+        WebElement elementalSelenium = driver.findElement(By.linkText("Elemental Selenium"));
 
         Assert.assertTrue(elementalSelenium.isDisplayed());
 

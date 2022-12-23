@@ -32,7 +32,7 @@ public class Day06_C15_Actions2 {
         driver.manage().window().maximize();
     }
     @Test
-    public void hoverOver(){
+    public void hoverOver() throws InterruptedException {
 //        1- Given kullanici  https://www.amazon.com/ adresine gider
         driver.get("https://www.amazon.com/");
 
@@ -44,6 +44,8 @@ public class Day06_C15_Actions2 {
         //3.hover over yap
         actions.moveToElement(accountLists).perform();
         driver.findElement(By.linkText("Account")).click();
+
+        Thread.sleep(3000);
 
 
 //        3- Then page title'in “Your Account” icerdigini verify et

@@ -38,7 +38,6 @@ public class Day06_C13_IFrame_Ornek {
     }
     @After
     public void tearDown(){
-
         driver.close();
     }
 }

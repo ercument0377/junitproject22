@@ -33,7 +33,7 @@ public class Day06_C15_Actions {
     }
 
     @Test
-    public void contextClickMethod() {
+    public void contextClickMethod() throws InterruptedException {
 //        1-  Given kullanici the https://the-internet.herokuapp.com/context_menu sayfasindadir
         driver.get("https://the-internet.herokuapp.com/context_menu");
 //        2-  When box (kutucuk) Right clicks edilir
@@ -45,14 +45,14 @@ public class Day06_C15_Actions {
         //3.adım actions object olustu, elementi bulduk aldık, right (saga tıkla = contextClick(box)) click yap,perform methodu meutlaka kullanılmalı
         actions.contextClick(box).perform();
 
-
+        Thread.sleep(3000);
 //        3- Then “You selected a context menu” alert mesajini verify et
         String alert = driver.switchTo().alert().getText();
         Assert.assertEquals("You selected a context menu", alert);
 
 //        4- Then alert'u accept et
         driver.switchTo().alert().accept();
-
+       Thread.sleep(3000);
 
     }
 
