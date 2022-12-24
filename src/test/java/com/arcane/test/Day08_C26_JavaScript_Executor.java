@@ -27,19 +27,20 @@ public class Day08_C26_JavaScript_Executor extends TestBase {
      */
 
     @Test
-    public void scrollIntoView(){
+    public void scrollIntoView() throws InterruptedException {
         driver.get("http://www.carettahotel.com/");
         driver.findElement(By.id("details-button")).click();
-        driver.findElement(By.id("proceed-link"));
+        driver.findElement(By.id("proceed-link")).click();
 
 
         // elementi asağı kaydır
-      WebElement question = driver.findElement(By.xpath("//*[.='Have a Questions?']"));
-    //    Assert.assertTrue(question.isDisplayed());
+        WebElement  question = driver.findElement(By.xpath("//*[.='Have a Questions?']"));
+
+        Thread.sleep(3000);
         JavascriptExecutor je = (JavascriptExecutor)driver;
         je.executeScript("arguments[0].scrollIntoView(true);", question);
-
-        Assert.assertEquals(question.getText(),"//*[.='Have a Questions?']");
+        Thread.sleep(3000);
+        Assert.assertEquals(question.getText(), "Have a Questions?");
 
     }
 
