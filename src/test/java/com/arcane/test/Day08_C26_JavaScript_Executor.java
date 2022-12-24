@@ -42,6 +42,8 @@ public class Day08_C26_JavaScript_Executor extends TestBase {
         Thread.sleep(3000);
         Assert.assertEquals(question.getText(), "Have a Questions?");
 
+        // bitti guncel hali
+
     }
 
 }
